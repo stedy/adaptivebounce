@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
-
 import os
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
+from flask.ext.moment import Moment
 
 app = Flask(__name__)
+moment = Moment(app)
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
@@ -53,7 +53,7 @@ def close_db(error):
 @app.route('/')
 def show_entries():
     db = get_db()
-    cur = db.execute('select id, next from main order by id desc')
+    cur = db.execute('select next, location, comments from main')
     entries = cur.fetchall()
     return render_template('main.html', entries=entries)
 
