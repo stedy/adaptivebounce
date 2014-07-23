@@ -3,10 +3,11 @@
 <head>
       {{ moment.include_jquery() }}
       {{ moment.include_moment() }}
+<script src="https://raw.githubusercontent.com/icambron/moment-countdown/master/bin/moment-countdown.min.js"></script>
+<script src="https://bitbucket.org/mckamey/countdown.js/raw/tip/countdown.min.js"></script>
 </head>
 
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<script src="http://momentjs.com/downloads/moment.js"></script>
 <div class=page>
   <h1>Adaptive Bounce</h1>
   {% for message in get_flashed_messages() %}

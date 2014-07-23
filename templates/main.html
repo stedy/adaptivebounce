@@ -1,16 +1,13 @@
 {% extends "layout.html" %}
 {% block body %}
   {% for entry in entries %}
-      <dt>Current time is {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}
-      <dt>Next workout:
-      <dt> {{ entry.next }}
-      <dt>Location:
-      <dt> {{ entry.location }}
-      <dt>Comments:
-      <dt> {{ entry.comments }}
-      </dl>
-    </form>
-  <ul class=entries>
+  <dt>Current time is {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}
+  <br></br>
+<table>
+  <tr><td><b>Next workout:</td><td> {{ entry.next }} </td></tr>
+    <tr><td><b>Location:</td><td> {{ entry.location }} </td></tr>
+      <tr><td><b>Comments:</td><td> {{ entry.comments }} </td></tr>
+      </table>
+  <dt>Better get ready it starts {{ moment(then).fromNow() }}
   {% endfor %}
-  </ul>
 {% endblock %}

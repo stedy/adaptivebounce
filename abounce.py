@@ -1,3 +1,4 @@
+import datetime as dt
 import os
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
@@ -55,7 +56,8 @@ def show_entries():
     db = get_db()
     cur = db.execute('select next, location, comments from main')
     entries = cur.fetchall()
-    return render_template('main.html', entries=entries)
+    then = dt.datetime.strptime(entries[0]['next'], "%Y-%m-%d %H:%M")
+    return render_template('main.html', entries=entries, then = then)
 
 
 @app.route('/add', methods=['POST'])
@@ -69,5 +71,4 @@ def add_entry():
 
 
 if __name__ == '__main__':
-    init_db()
     app.run()
