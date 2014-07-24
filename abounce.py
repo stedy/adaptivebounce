@@ -1,7 +1,7 @@
 import datetime as dt
 import os
 from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, session, g, redirect, url_for, abort, \
+from flask import Flask, request, g, redirect, url_for,\
      render_template, flash
 from flask.ext.moment import Moment
 
@@ -53,20 +53,22 @@ def close_db(error):
 
 @app.route('/')
 def show_entries():
+    """Show the most recent event only"""
     db = get_db()
     cur = db.execute("""SELECT max(id) as id, next, location,
                     comments FROM main""")
     entries = cur.fetchall()
     then = dt.datetime.strptime(entries[0]['next'], "%Y-%m-%d %H:%M:%S")
-    return render_template('main.html', entries=entries, then = then)
+    return render_template('main.html', entries=entries, then=then)
 
 @app.route('/add')
 def add():
     return render_template('add.html')
 
 
-@app.route('/add_event', methods=['GET','POST'])
+@app.route('/add_event', methods=['GET', 'POST'])
 def add_event():
+    """Add next event"""
     db = get_db()
     next_date = request.form['nextdate']
     next_time = request.form['nexttime']
@@ -77,7 +79,11 @@ def add_event():
                  [next_dt, request.form['location'], request.form['comments']])
     db.commit()
     flash('New entry was successfully posted')
-    return render_template('main.html')
+    cur = db.execute("""SELECT max(id) as id, next, location,
+                    comments FROM main""")
+    entries = cur.fetchall()
+    then = dt.datetime.strptime(entries[0]['next'], "%Y-%m-%d %H:%M:%S")
+    return render_template('main.html', entries=entries, then=then)
 
 
 if __name__ == '__main__':
