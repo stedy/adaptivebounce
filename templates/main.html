@@ -9,6 +9,6 @@
       <tr><td><b>Comments:</td><td> {{ entry.comments }} </td></tr>
       </table>
   <br>
-  <dt>Better get ready it starts {{ moment(then).fromNow() }}
+  <dt>Better get ready it starts {{ moment(then, local=True).fromNow() }}
   {% endfor %}
 {% endblock %}
