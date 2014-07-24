@@ -54,9 +54,10 @@ def close_db(error):
 @app.route('/')
 def show_entries():
     db = get_db()
-    cur = db.execute('select next, location, comments from main')
+    cur = db.execute("""SELECT max(id) as id, next, location,
+                    comments FROM main""")
     entries = cur.fetchall()
-    then = dt.datetime.strptime(entries[0]['next'], "%Y-%m-%d %H:%M")
+    then = dt.datetime.strptime(entries[0]['next'], "%Y-%m-%d %H:%M:%S")
     return render_template('main.html', entries=entries, then = then)
 
 @app.route('/add')
@@ -67,7 +68,11 @@ def add():
 @app.route('/add_event', methods=['GET','POST'])
 def add_event():
     db = get_db()
-    next_dt = ""
+    next_date = request.form['nextdate']
+    next_time = request.form['nexttime']
+    next_dt = dt.datetime.strptime(next_date + " " + next_time,
+            "%m/%d/%Y %H:%M")
+    print next_dt
     db.execute('insert into main (next, location, comments) values (?, ?, ?)',
                  [next_dt, request.form['location'], request.form['comments']])
     db.commit()
