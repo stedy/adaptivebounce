@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+  <dt>Current time is {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}
+  <br></br>
+<table>
+  <tr><td><b>Next workout Date:</td>
+      <td><input type=text id="datepicker" name=workout></td></tr>
+    <tr><td><b>Next workout Time:</td>
+        <td><input type="text" id="time" name=time></td></tr>
+        <tr><td><b>Location:</td>
+            <td><select name=location>
+                <option value="Howe St. Stairs">Howe St. Stairs</option>
+                <option value="Streissguth Stairs">Streissguth Stairs</option>
+                <option value="Rogers Playground">Rogers Playground</option>
+                <option value="Lake Union Park">Lake Union Park</option>
+                <option value="Harland">Harland</option>
+          </select></td></tr>
+        <td><b>Comments:</td>
+          <td><textarea rows="4" cols="40" name=Title></textarea></td></tr>
+      </table>
+{% endblock %}

@@ -59,15 +59,20 @@ def show_entries():
     then = dt.datetime.strptime(entries[0]['next'], "%Y-%m-%d %H:%M")
     return render_template('main.html', entries=entries, then = then)
 
+@app.route('/add')
+def add():
+    return render_template('add.html')
 
-@app.route('/add', methods=['POST'])
+
+@app.route('/add_entry', methods=['POST'])
 def add_entry():
     db = get_db()
     db.execute('insert into entries (title, text) values (?, ?)',
                  [request.form['title'], request.form['text']])
     db.commit()
     flash('New entry was successfully posted')
-    return redirect(url_for('show_entries'))
+    return render_template('add.html')
+    #return redirect(url_for('show_entries'))
 
 
 if __name__ == '__main__':

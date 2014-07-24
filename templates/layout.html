@@ -3,13 +3,18 @@
 <head>
       {{ moment.include_jquery() }}
       {{ moment.include_moment() }}
-<script src="https://raw.githubusercontent.com/icambron/moment-countdown/master/bin/moment-countdown.min.js"></script>
-<script src="https://bitbucket.org/mckamey/countdown.js/raw/tip/countdown.min.js"></script>
+       <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+       <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+       <script>
+          $(function() {
+            $( "#datepicker" ).datepicker();
+          });
+        </script>
 </head>
-
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
 <div class=page>
-  <h1>Adaptive Bounce</h1>
+  <h1>Adaptive Bounce Club</h1>
   {% for message in get_flashed_messages() %}
     <div class=flash>{{ message }}</div>
   {% endfor %}
