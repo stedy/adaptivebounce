@@ -64,15 +64,15 @@ def add():
     return render_template('add.html')
 
 
-@app.route('/add_entry', methods=['POST'])
-def add_entry():
+@app.route('/add_event', methods=['GET','POST'])
+def add_event():
     db = get_db()
-    db.execute('insert into entries (title, text) values (?, ?)',
-                 [request.form['title'], request.form['text']])
+    next_dt = ""
+    db.execute('insert into main (next, location, comments) values (?, ?, ?)',
+                 [next_dt, request.form['location'], request.form['comments']])
     db.commit()
     flash('New entry was successfully posted')
-    return render_template('add.html')
-    #return redirect(url_for('show_entries'))
+    return render_template('main.html')
 
 
 if __name__ == '__main__':

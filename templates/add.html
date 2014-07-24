@@ -2,11 +2,12 @@
 {% block body %}
   <dt>Current time is {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}
   <br></br>
+  <form action="{{ url_for('add_event') }}" method=post>
 <table>
   <tr><td><b>Next workout Date:</td>
-      <td><input type=text id="datepicker" name=workout></td></tr>
+      <td><input type=text id="datepicker" name=nextdate></td></tr>
     <tr><td><b>Next workout Time:</td>
-        <td><input type="text" id="time" name=time></td></tr>
+        <td><input type="text" id="time" name=nexttime></td></tr>
         <tr><td><b>Location:</td>
             <td><select name=location>
                 <option value="Howe St. Stairs">Howe St. Stairs</option>
@@ -16,6 +17,8 @@
                 <option value="Harland">Harland</option>
           </select></td></tr>
         <td><b>Comments:</td>
-          <td><textarea rows="4" cols="40" name=Title></textarea></td></tr>
+          <td><textarea rows="4" cols="40" name=comments></textarea></td></tr>
       </table>
+      <br></br>
+      <input type=submit value="Schedule that!">
 {% endblock %}
