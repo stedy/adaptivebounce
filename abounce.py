@@ -74,7 +74,6 @@ def add_event():
     next_time = request.form['nexttime']
     next_dt = dt.datetime.strptime(next_date + " " + next_time,
             "%m/%d/%Y %H:%M")
-    print next_dt
     db.execute('insert into main (next, location, comments) values (?, ?, ?)',
                  [next_dt, request.form['location'], request.form['comments']])
     db.commit()
