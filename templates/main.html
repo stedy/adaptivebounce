@@ -4,7 +4,7 @@
   <dt>Current time is {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}
   <br></br>
 <table>
-  <tr><td><b>Next workout:</td><td> {{ entry.next }} </td></tr>
+  <tr><td><b>Next workout:</td><td> {{ moment(then, local=True).calendar() }} </td></tr>
     <tr><td><b>Location:</td><td> {{ entry.location }} </td></tr>
       <tr><td><b>Comments:</td><td> {{ entry.comments }} </td></tr>
       </table>
